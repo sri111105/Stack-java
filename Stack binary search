@@ -1,0 +1,59 @@
+import java.util.*;
+class MyStack {
+    int arr[];
+    int top;
+    int capacity;
+    MyStack(int cap){
+        capacity = cap;
+        arr = new int[capacity];
+        top = -1;
+    }
+    void push(int x){
+        if(top == capacity - 1){
+            System.out.println("Stack Overflow");
+            return;
+        }
+        arr[++top] = x;
+    }
+    int pop(){
+        if(top == -1){
+            System.out.println("Stack Underflow");
+            return -1;
+        }
+        return arr[top--];
+    }
+    int peek(){
+        if(top == -1){
+            System.out.println("Stack is Empty");
+            return -1;
+        }
+        return arr[top];
+    }
+    boolean isEmpty() {
+        return top == -1;
+    }
+
+    int binarySearch(int value) {
+        int left=0;
+        int right=top;
+        while(left<=right){
+            int mid=left+(right-left)/2;
+            if(arr[mid]==value)  return mid;
+            else if(arr[mid]<value) left=mid+1;
+            else right=mid-1;
+        }
+        return -1;
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        MyStack st = new MyStack(5);
+        st.push(10);
+        st.push(20);
+        st.push(30);
+        st.push(40);
+
+        System.out.println("Search 30 at index: " + st.binarySearch(30));
+        System.out.println("Search 50 at index: " + st.binarySearch(50));
+    }
+}
